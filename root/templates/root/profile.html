@@ -1,0 +1,108 @@
+{% extends 'root/main.html' %}
+
+{% block content %}
+
+<style>
+
+    .review-form{
+        padding-left: 20px;
+        padding-bottom: 30px;
+    }
+
+    .review-wrapper{
+        padding-left: 20px;
+    }
+
+    .page-wrapper{
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .customer-name{
+        display: grid;
+        justify-content: center;
+    }
+
+    .customer-container{
+        display: grid;
+    }
+
+    .customer-details{
+        display: grid;
+        justify-content: center;
+    }
+
+    .customer-img{
+        padding: 12px;
+        display: grid;
+        justify-content: center;
+    }
+
+    #customer-pic{
+        height: 400px;
+        width: 400px;
+        border: 1px solid #B2BEB5;
+    }
+
+    .customer-description{
+        display: grid;
+        padding: 12px;
+    }
+
+</style>
+
+
+<div class="page-wrapper">
+
+    <div class="customer-container">
+        <div class="customer-name">
+            <h1 class="name">{{customer.name}}</h1>
+        </div>
+        <div class="customer-details">
+            <div class="customer-img">
+                <img id="customer-pic" class="thumbnail" src="{{customer.imageURL}}">
+            </div>
+            <div class="customer-description">
+                <div>
+                    <h4 style="display: inline-block;">Email : {{customer.email}}</h4>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        
+    </div>
+
+    <div>
+        <div class="review-wrapper">
+            <h3>Reviews</h3>
+            <hr>
+
+            {% for review in reviews %}
+                <div>
+                    <small><a href="{% url 'profile' review.customer.id %}">@{{review.customer}}</a> -- {{review.created|timesince}} ago</small>
+                    {% if request.user.customer == review.customer %}
+                        <a href="{% url 'delete-review' review.id %}">Delete</a>
+                    {% endif %}
+                    <p>{{review.body}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div>
+    {% if customer == request.user.customer %}
+        {% for order in orders %}
+        <hr>
+            <div>
+                <p>Transaction ID : {{order.transaction_id}}</p>
+                <p>Purchased Date : {{order.date_ordered}}</p>
+                <p>Total Amount : {{order.get_cart_total}}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}
