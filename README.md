@@ -18,11 +18,11 @@ The project follows a standard Django project structure with the following notab
 
 To run the project, ensure you have the following installed on your system:
 
-Python (version 3.x)
-Django (version 3.x)
-Django REST Framework (version 3.x)
-PayPal SDK (Python) for payment integration
-Other dependencies listed in the requirements.txt file
+Python (version 3.x) <br />
+Django (version 3.x) <br />
+Django REST Framework (version 3.x) <br />
+PayPal SDK (Python) for payment integration <br />
+Other dependencies listed in the requirements.txt file <br />
 
 # Installation and Setup
 
